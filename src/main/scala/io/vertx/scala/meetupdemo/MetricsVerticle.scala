@@ -22,7 +22,6 @@ class MetricsVerticle extends ScalaVerticle {
     val router = Router.router(vertx)
     val prometheus = new MetricsHandler()
     router.route("/metrics").handler(ctx => prometheus.handle(ctx.asJava.asInstanceOf[JRoutingContext]))
-
     router.asJava.asInstanceOf[JRouter].route("/metrics").handler(new MetricsHandler())
 
     vertx

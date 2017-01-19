@@ -5,9 +5,6 @@ import io.vertx.lang.scala.ScalaVerticle
 import scala.concurrent.Promise
 import scala.util.{Failure, Success}
 
-/**
-  * Created by jochen on 17.01.17.
-  */
 class StarterVerticle  extends ScalaVerticle {
 
   override def start(startPromise: Promise[Unit]): Unit = {

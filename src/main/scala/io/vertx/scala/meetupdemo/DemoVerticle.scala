@@ -7,11 +7,13 @@ import scala.util.{Failure, Success}
 
 class DemoVerticle extends ScalaVerticle {
 
-
   override def start(startPromise: Promise[Unit]): Unit = {
     vertx
       .createHttpServer()
-      .requestHandler(a => a.response().end("Hello World"))
+      .requestHandler(a => {
+        vertx.eventBus().send("req","hallo")
+        a.response().end("Hello World")
+      })
       .listenFuture(8666)
       .andThen{
         case Success(_) => startPromise.success(())
