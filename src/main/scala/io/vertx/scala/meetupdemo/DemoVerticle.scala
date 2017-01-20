@@ -8,14 +8,12 @@ import scala.util.{Failure, Success}
 class DemoVerticle extends ScalaVerticle {
 
   override def start(): Future[Unit] = {
+    val port = Option(config.getInteger(httpPort).intValue()).getOrElse(8080)
     val promise = Promise[Unit]
     vertx
       .createHttpServer()
-      .requestHandler(a => {
-        vertx.eventBus().send("req", "Hello")
-        a.response().end("Hello World")
-      })
-      .listenFuture(8666)
+      .requestHandler(_.response().end("Hello World"))
+      .listenFuture(port)
       .andThen{
         case Success(_) => promise.success(())
         case Failure(t) => promise.failure(t)

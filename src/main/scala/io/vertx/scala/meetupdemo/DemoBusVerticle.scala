@@ -8,7 +8,7 @@ import scala.concurrent.Future
 class DemoBusVerticle extends ScalaVerticle {
 
   override def start(): Future[Unit] = {
-    vertx.eventBus().consumer("req", {a:Message[String] => print(s"${a.body()} ${hashCode()}")})
+    vertx.eventBus().consumer("testaddress", {a:Message[String] => print(s"${a.body()} ${hashCode()}")})
     Future.successful(())
   }
 }

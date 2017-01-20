@@ -1,4 +1,4 @@
-var eb = new EventBus('http://localhost:8668/eventbus');
+var eb = new EventBus('http://localhost:8084/eventbus');
 eb.onopen = function() {
     var d1 = document.getElementById('one');
     eb.registerHandler("browser", function (error, message) {

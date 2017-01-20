@@ -11,23 +11,20 @@ import scala.concurrent.{Future, Promise}
 import scala.util.{Failure, Success}
 
 /**
-  * Examples for using templating engines.
+  * Example for using the browser bridge from a verticle.
   */
-class TemplateVerticle extends ScalaVerticle {
+class BridgeVerticle extends ScalaVerticle {
 
   override def start(): Future[Unit] = {
-    val promise = Promise[Unit]
-    val templateEngine = HandlebarsTemplateEngine.create()
     val port = Option(config.getInteger(httpPort).intValue()).getOrElse(8080)
-    val router = Router.router(vertx)
-    //load templates by automatically resolving them
-    router.get("/templates/*").handler(TemplateHandler.create(templateEngine, "io/vertx/scala/meetupdemo/templates/", "text/html"))
-    //render template explicitly
-    router.get("/").handler(r => templateEngine.renderFuture(r, "io/vertx/scala/meetupdemo/templates/test.hbs").andThen{
-      case Success(f) => r.response().end(f)
-      case Failure(t) => r.response().end(t.getMessage)
-    })
+    val promise = Promise[Unit]
 
+    vertx.setPeriodic(1000, a => vertx.eventBus().send("browser",s"from ${getClass.getName}"))
+    vertx.eventBus().consumer("server", {a:Message[String] => println(a.body())})
+
+    val router = Router.router(vertx)
+    router.route("/static/*").handler(StaticHandler.create())
+    router.route("/eventbus/*").handler(initSockJs)
     vertx
       .createHttpServer()
       .requestHandler(router.accept)
@@ -37,5 +34,14 @@ class TemplateVerticle extends ScalaVerticle {
         case Failure(t) => promise.failure(t)
       }
     promise.future
+  }
+
+  def initSockJs = {
+    val sockJSHandler = SockJSHandler.create(vertx)
+    val options = BridgeOptions()
+      .addOutboundPermitted(PermittedOptions().setAddress("browser"))
+      .addInboundPermitted(PermittedOptions().setAddress("server"))
+    sockJSHandler.bridge(options)
+    sockJSHandler
   }
 }

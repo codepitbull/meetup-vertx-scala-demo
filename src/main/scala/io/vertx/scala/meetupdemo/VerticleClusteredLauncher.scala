@@ -2,6 +2,9 @@ package io.vertx.scala.meetupdemo
 
 import io.vertx.scala.core.{DeploymentOptions, Vertx, VertxOptions}
 
+/**
+  * Launch a clustered Vertx instance for playing around.
+  */
 object VerticleClusteredLauncher {
   def main(args: Array[String]): Unit = {
     //Reduce heartbeat interval for demo purposes
