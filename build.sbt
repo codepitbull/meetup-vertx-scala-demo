@@ -32,14 +32,3 @@ assemblyMergeStrategy in assembly := {
 
 packageOptions += ManifestAttributes(
   ("Main-Verticle", "scala:io.vertx.scala.meetupdemo.StarterVerticle"))
-
-initialCommands := """|import io.vertx.lang.scala._
-                     |import io.vertx.scala.core._
-                     |import io.vertx.scala.meetupdemo._
-                     |import scala.concurrent.Future
-                     |import scala.concurrent.Promise
-                     |import scala.util.Success
-                     |import scala.util.Failure
-                     |val vertx = Vertx.vertx
-                     |implicit val executionContext = io.vertx.lang.scala.VertxExecutionContext(vertx.getOrCreateContext)
-                     |""".stripMargin

@@ -2,7 +2,7 @@ import sbt._
 
 object Version {
   final val Scala       = "2.12.1"
-  final val ScalaTest   = "3.0.0"
+  final val ScalaTest   = "3.0.1"
   final val Vertx       = "3.4.0-SNAPSHOT"
   final val Prometheus  = "0.0.19"
 }
