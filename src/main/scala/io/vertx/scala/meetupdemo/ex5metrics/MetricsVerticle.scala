@@ -1,13 +1,13 @@
-package io.vertx.scala.meetupdemo
+package io.vertx.scala.meetupdemo.ex5metrics
 
 import com.codahale.metrics.SharedMetricRegistries
-import io.prometheus.client.dropwizard.DropwizardExports
 import io.prometheus.client.CollectorRegistry
+import io.prometheus.client.dropwizard.DropwizardExports
 import io.prometheus.client.vertx.MetricsHandler
-import io.vertx.ext.web.{Router => JRouter}
+import io.vertx.ext.web.{Router => JRouter, RoutingContext => JRoutingContext}
 import io.vertx.lang.scala.ScalaVerticle
 import io.vertx.scala.ext.web.Router
-import io.vertx.ext.web.{RoutingContext => JRoutingContext}
+import io.vertx.scala.meetupdemo.httpPort
 
 import scala.concurrent.{Future, Promise}
 import scala.util.{Failure, Success}
@@ -19,10 +19,9 @@ import scala.util.{Failure, Success}
   *
   */
 class MetricsVerticle extends ScalaVerticle {
-  override def start(): Future[Unit] = {
+  override def startFuture(): Future[Unit] = {
     val port = Option(config.getInteger(httpPort).intValue()).getOrElse(8080)
     val promise = Promise[Unit]
-    sys.env.get("vertx.metrics.options.registryName").getOrElse()
     CollectorRegistry.defaultRegistry.register(new DropwizardExports(SharedMetricRegistries.getOrCreate("exported")))
 
     val router = Router.router(vertx)

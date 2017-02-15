@@ -1,20 +1,20 @@
-package io.vertx.scala.meetupdemo
+package io.vertx.scala.meetupdemo.ex1bus
 
 import io.vertx.lang.scala.ScalaVerticle
 
 import scala.concurrent.{Future, Promise}
 import scala.util.{Failure, Success}
 
-class DemoVerticle extends ScalaVerticle {
+class BusVerticle extends ScalaVerticle {
 
-  override def start(): Future[Unit] = {
-    val port = config.getInteger(httpPort, 8080)
+  override def startFuture(): Future[Unit] = {
     val promise = Promise[Unit]
     vertx
-      .createHttpServer()
-      .requestHandler(_.response().end("Hello World"))
-      .listenFuture(port)
-      .andThen{
+      .eventBus()
+      .consumer[String]("testAddress")
+      .handler(_.reply("Hello World!"))
+      .completionFuture()
+      .andThen {
         case Success(_) => promise.success(())
         case Failure(t) => promise.failure(t)
       }

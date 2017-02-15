@@ -1,14 +1,14 @@
-package io.vertx.scala.meetupdemo
+package io.vertx.scala.meetupdemo.ex2http
 
 import io.vertx.lang.scala.VertxExecutionContext
 import io.vertx.scala.core.Vertx
 import org.scalatest._
 
-import scala.concurrent.{Await, Promise}
 import scala.concurrent.duration._
+import scala.concurrent.{Await, Promise}
 import scala.util.{Failure, Success}
 
-class DemoVerticleTest extends FunSuite {
+class HttpVerticleSpec extends FunSuite {
   val vertx = Vertx.vertx
   implicit val vertxExecutionContext = VertxExecutionContext(
     vertx.getOrCreateContext()
@@ -16,7 +16,7 @@ class DemoVerticleTest extends FunSuite {
 
   Await.result(
     vertx
-      .deployVerticleFuture("scala:" + classOf[DemoVerticle].getName)
+      .deployVerticleFuture("scala:" + classOf[HttpVerticle].getName)
       .andThen {
         case Success(d) => d
         case Failure(t) => throw new RuntimeException(t)
@@ -24,7 +24,7 @@ class DemoVerticleTest extends FunSuite {
     1000 millis
   )
 
-  test("DemoVerticle should bind to 8666 and answer with 'world'") {
+  test("HttpVerticle should bind to 8666 and answer with 'world'") {
     val promise = Promise[String]
     vertx.createHttpClient()
         .getNow(8666, "127.0.0.1", "/hello", r => r.bodyHandler(body => promise.complete(Success(body.toString()))))

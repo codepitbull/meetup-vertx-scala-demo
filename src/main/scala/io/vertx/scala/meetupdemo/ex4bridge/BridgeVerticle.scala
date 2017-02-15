@@ -1,11 +1,11 @@
-package io.vertx.scala.meetupdemo
+package io.vertx.scala.meetupdemo.ex4bridge
 
 import io.vertx.lang.scala.ScalaVerticle
 import io.vertx.scala.core.eventbus.Message
 import io.vertx.scala.ext.web.Router
+import io.vertx.scala.ext.web.handler.StaticHandler
 import io.vertx.scala.ext.web.handler.sockjs.{BridgeOptions, PermittedOptions, SockJSHandler}
-import io.vertx.scala.ext.web.handler.{StaticHandler, TemplateHandler}
-import io.vertx.scala.ext.web.templ.HandlebarsTemplateEngine
+import io.vertx.scala.meetupdemo.httpPort
 
 import scala.concurrent.{Future, Promise}
 import scala.util.{Failure, Success}
@@ -15,7 +15,7 @@ import scala.util.{Failure, Success}
   */
 class BridgeVerticle extends ScalaVerticle {
 
-  override def start(): Future[Unit] = {
+  override def startFuture(): Future[Unit] = {
     val port = Option(config.getInteger(httpPort).intValue()).getOrElse(8080)
     val promise = Promise[Unit]
 

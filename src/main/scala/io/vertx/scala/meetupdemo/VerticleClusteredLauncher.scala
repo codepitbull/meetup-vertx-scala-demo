@@ -1,6 +1,7 @@
 package io.vertx.scala.meetupdemo
 
 import io.vertx.scala.core.{DeploymentOptions, Vertx, VertxOptions}
+import io.vertx.scala.meetupdemo.ex2http.HttpVerticle
 
 /**
   * Launch a clustered Vertx instance for playing around.
@@ -11,7 +12,7 @@ object VerticleClusteredLauncher {
     System.setProperty("hazelcast.max.no.heartbeat.seconds","5")
     Vertx.clusteredVertx(VertxOptions().setClusterHost("127.0.0.1"),v => {
       val vertx = v.result()
-      vertx.deployVerticle("scala:"+classOf[DemoVerticle].getName, DeploymentOptions().setInstances(2))
+      vertx.deployVerticle("scala:"+classOf[HttpVerticle].getName, DeploymentOptions().setInstances(2))
     })
   }
 }

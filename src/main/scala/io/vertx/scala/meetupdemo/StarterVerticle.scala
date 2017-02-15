@@ -3,7 +3,12 @@ package io.vertx.scala.meetupdemo
 import io.vertx.lang.scala.ScalaVerticle
 import io.vertx.lang.scala.json.Json
 import io.vertx.scala.core.DeploymentOptions
+import io.vertx.scala.meetupdemo.ex2http.HttpVerticle
+import io.vertx.scala.meetupdemo.ex3web.TemplateVerticle
+import io.vertx.scala.meetupdemo.ex4bridge.BridgeVerticle
+import io.vertx.scala.meetupdemo.ex5metrics.MetricsVerticle
 
+import scala.concurrent.Future.sequence
 import scala.concurrent.{Future, Promise}
 import scala.util.{Failure, Success}
 
@@ -12,16 +17,16 @@ import scala.util.{Failure, Success}
   */
 class StarterVerticle extends ScalaVerticle {
 
-  override def start(): Future[Unit] = {
+  override def startFuture(): Future[Unit] = {
     val promise = Promise[Unit]
-    val combinedFuture = for {
-      f1 <- vertx.deployVerticleFuture("scala:"+classOf[DemoVerticle].getName, DeploymentOptions().setConfig(Json.obj((httpPort, 8081))))
-      f2 <- vertx.deployVerticleFuture("scala:"+classOf[MetricsVerticle].getName, DeploymentOptions().setConfig(Json.obj((httpPort, 8082))))
-      f3 <- vertx.deployVerticleFuture("scala:"+classOf[TemplateVerticle].getName, DeploymentOptions().setConfig(Json.obj((httpPort, 8083))))
-      f4 <- vertx.deployVerticleFuture("scala:"+classOf[BridgeVerticle].getName, DeploymentOptions().setConfig(Json.obj((httpPort, 8084))))
-    } yield(f1, f2, f3, f4)
+    val futSeq = sequence(Seq(
+      vertx.deployVerticleFuture("scala:"+classOf[HttpVerticle].getName, DeploymentOptions().setConfig(Json.obj((httpPort, 8081)))),
+      vertx.deployVerticleFuture("scala:"+classOf[MetricsVerticle].getName, DeploymentOptions().setConfig(Json.obj((httpPort, 8082)))),
+      vertx.deployVerticleFuture("scala:"+classOf[TemplateVerticle].getName, DeploymentOptions().setConfig(Json.obj((httpPort, 8083)))),
+      vertx.deployVerticleFuture("scala:"+classOf[BridgeVerticle].getName, DeploymentOptions().setConfig(Json.obj((httpPort, 8084)))))
+    )
 
-    combinedFuture.onComplete{
+    futSeq.onComplete{
       case Success(_) => promise.success(())
       case Failure(t) => promise.failure(t)
     }

@@ -1,8 +1,5 @@
 import sbt.Package._
 
-lazy val `vertx-scala-sbt` = project
-  .in(file("."))
-
 version := "0.1-SNAPSHOT"
 name := "meetup-vertx-demo"
 organization := "io.vertx"

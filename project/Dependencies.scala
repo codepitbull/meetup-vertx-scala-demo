@@ -8,13 +8,13 @@ object Version {
 }
 
 object Library {
-  val vertxCodegen          = "io.vertx"       %  "vertx-codegen"                    % Version.Vertx     % "provided" changing()
-  val vertxLangScala        = "io.vertx"       %% "vertx-lang-scala"                 % Version.Vertx                  changing()
-  val vertxWeb              = "io.vertx"       %% "vertx-web-scala"                  % Version.Vertx                  changing()
-  val vertxHandlebars       = "io.vertx"       %% "vertx-web-templ-handlebars-scala" % Version.Vertx                  changing()
-  val dropwizard            = "io.vertx"       %% "vertx-dropwizard-metrics-scala"   % Version.Vertx                  changing()
-  val hazelcast             = "io.vertx"       %  "vertx-hazelcast"                  % Version.Vertx                  changing()
+  val vertxCodegen          = "io.vertx"       %  "vertx-codegen"                    % Version.Vertx     % "provided"   changing()
+  val vertxLangScala        = "io.vertx"       %% "vertx-lang-scala"                 % Version.Vertx                    changing()
+  val vertxWeb              = "io.vertx"       %% "vertx-web-scala"                  % Version.Vertx                    changing()
+  val vertxHandlebars       = "io.vertx"       %% "vertx-web-templ-handlebars-scala" % Version.Vertx                    changing()
+  val dropwizard            = "io.vertx"       %% "vertx-dropwizard-metrics-scala"   % Version.Vertx                    changing()
+  val hazelcast             = "io.vertx"       %  "vertx-hazelcast"                  % Version.Vertx                    changing()
   val prometheusVertx       = "io.prometheus"  %  "simpleclient_vertx"               % Version.Prometheus
   val prometheusDropwizard  = "io.prometheus"  %  "simpleclient_dropwizard"          % Version.Prometheus
-  val scalaTest             = "org.scalatest"  %% "scalatest"                        % Version.ScalaTest              changing()
+  val scalaTest             = "org.scalatest"  %% "scalatest"                        % Version.ScalaTest
 }
