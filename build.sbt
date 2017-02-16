@@ -17,6 +17,7 @@ libraryDependencies ++= Vector (
   Library.hazelcast,
   Library.logging,
   Library.lof4j2,
+  Library.restAssured     % "test",
   Library.pahoMqtt        % "test",
   Library.scalaTest       % "test"
 )

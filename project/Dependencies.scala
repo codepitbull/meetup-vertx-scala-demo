@@ -7,6 +7,7 @@ object Version {
   final val Prometheus  = "0.0.19"
   final val Log4J2      = "2.8"
   final val PahoMqtt    = "1.1.0"
+  final val RestAssured = "3.0.2"
 }
 
 object Library {
@@ -22,5 +23,6 @@ object Library {
   val logging               = "org.apache.logging.log4j"  %  "log4j-slf4j-impl"                 % Version.Log4J2
   val lof4j2                = "org.apache.logging.log4j"  %  "log4j-api"                        % Version.Log4J2
   val pahoMqtt              = "org.eclipse.paho"          %  "org.eclipse.paho.client.mqttv3"   % Version.PahoMqtt
+  val restAssured           = "io.rest-assured"           %  "scala-support"                    % Version.RestAssured
   val scalaTest             = "org.scalatest"             %% "scalatest"                        % Version.ScalaTest
 }
