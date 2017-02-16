@@ -9,11 +9,15 @@ libraryDependencies ++= Vector (
   Library.vertxLangScala,
   Library.vertxCodegen,
   Library.vertxWeb,
+  Library.mqtt,
   Library.prometheusDropwizard,
   Library.prometheusVertx,
   Library.dropwizard,
   Library.vertxHandlebars,
   Library.hazelcast,
+  Library.logging,
+  Library.lof4j2,
+  Library.pahoMqtt        % "test",
   Library.scalaTest       % "test"
 )
 

@@ -2,22 +2,18 @@ package io.vertx.scala.meetupdemo.ex1bus
 
 import io.vertx.lang.scala.ScalaVerticle
 
-import scala.concurrent.{Future, Promise}
-import scala.util.{Failure, Success}
+import scala.concurrent.Future
 
+/**
+  * Simple verticle that replies to the address 'testAddress'.
+  */
 class BusVerticle extends ScalaVerticle {
 
   override def startFuture(): Future[Unit] = {
-    val promise = Promise[Unit]
     vertx
       .eventBus()
       .consumer[String]("testAddress")
       .handler(_.reply("Hello World!"))
       .completionFuture()
-      .andThen {
-        case Success(_) => promise.success(())
-        case Failure(t) => promise.failure(t)
-      }
-    promise.future
   }
 }

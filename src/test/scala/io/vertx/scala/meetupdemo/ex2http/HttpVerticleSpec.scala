@@ -1,34 +1,21 @@
 package io.vertx.scala.meetupdemo.ex2http
 
-import io.vertx.lang.scala.VertxExecutionContext
-import io.vertx.scala.core.Vertx
+import io.vertx.lang.scala.json.{Json, JsonObject}
+import io.vertx.scala.meetupdemo.{VerticleTesting, httpPort}
 import org.scalatest._
 
-import scala.concurrent.duration._
-import scala.concurrent.{Await, Promise}
-import scala.util.{Failure, Success}
+import scala.concurrent.Promise
+import scala.util.Success
 
-class HttpVerticleSpec extends FunSuite {
-  val vertx = Vertx.vertx
-  implicit val vertxExecutionContext = VertxExecutionContext(
-    vertx.getOrCreateContext()
-  )
+class HttpVerticleSpec extends VerticleTesting[HttpVerticle] with Matchers {
 
-  Await.result(
-    vertx
-      .deployVerticleFuture("scala:" + classOf[HttpVerticle].getName)
-      .andThen {
-        case Success(d) => d
-        case Failure(t) => throw new RuntimeException(t)
-      },
-    1000 millis
-  )
+  override def config(): JsonObject = Json.obj((httpPort, 8666))
 
-  test("HttpVerticle should bind to 8666 and answer with 'world'") {
+  "HttpVerticle" should "answer with 'Hello World' when /hello is accessed" in {
     val promise = Promise[String]
     vertx.createHttpClient()
-        .getNow(8666, "127.0.0.1", "/hello", r => r.bodyHandler(body => promise.complete(Success(body.toString()))))
-    promise.future.map(res => assert(res == "hello"))
+      .getNow(config().getInteger(httpPort), "127.0.0.1", "/hello", r => r.bodyHandler(body => promise.complete(Success(body.toString()))))
+    promise.future.map(res => res should equal("Hello World"))
   }
 
 }

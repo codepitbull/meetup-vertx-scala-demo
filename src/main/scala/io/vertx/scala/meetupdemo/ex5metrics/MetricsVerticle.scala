@@ -9,8 +9,7 @@ import io.vertx.lang.scala.ScalaVerticle
 import io.vertx.scala.ext.web.Router
 import io.vertx.scala.meetupdemo.httpPort
 
-import scala.concurrent.{Future, Promise}
-import scala.util.{Failure, Success}
+import scala.concurrent.Future
 
 /**
   * Example for integrating Prometheus with Vert.x.
@@ -21,7 +20,6 @@ import scala.util.{Failure, Success}
 class MetricsVerticle extends ScalaVerticle {
   override def startFuture(): Future[Unit] = {
     val port = Option(config.getInteger(httpPort).intValue()).getOrElse(8080)
-    val promise = Promise[Unit]
     CollectorRegistry.defaultRegistry.register(new DropwizardExports(SharedMetricRegistries.getOrCreate("exported")))
 
     val router = Router.router(vertx)
@@ -33,10 +31,6 @@ class MetricsVerticle extends ScalaVerticle {
       .createHttpServer()
       .requestHandler(router.accept)
       .listenFuture(port)
-      .andThen{
-        case Success(_) => promise.success(())
-        case Failure(t) => promise.failure(t)
-      }
-    promise.future
+        .map(_ => ())
   }
 }

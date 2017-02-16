@@ -5,4 +5,5 @@ package io.vertx.scala
   */
 package object meetupdemo {
   val httpPort = "http_port"
+  val mqttPort = "mqtt_port"
 }

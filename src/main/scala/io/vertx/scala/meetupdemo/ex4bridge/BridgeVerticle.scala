@@ -7,8 +7,7 @@ import io.vertx.scala.ext.web.handler.StaticHandler
 import io.vertx.scala.ext.web.handler.sockjs.{BridgeOptions, PermittedOptions, SockJSHandler}
 import io.vertx.scala.meetupdemo.httpPort
 
-import scala.concurrent.{Future, Promise}
-import scala.util.{Failure, Success}
+import scala.concurrent.Future
 
 /**
   * Example for using the browser bridge from a verticle.
@@ -17,10 +16,8 @@ class BridgeVerticle extends ScalaVerticle {
 
   override def startFuture(): Future[Unit] = {
     val port = Option(config.getInteger(httpPort).intValue()).getOrElse(8080)
-    val promise = Promise[Unit]
-
-    vertx.setPeriodic(1000, a => vertx.eventBus().send("browser",s"from ${getClass.getName}"))
-    vertx.eventBus().consumer("server", {a:Message[String] => println(a.body())})
+    vertx.setPeriodic(1000, a => vertx.eventBus().send("browser", s"from ${getClass.getName}"))
+    vertx.eventBus().consumer("server", { a: Message[String] => println(a.body()) })
 
     val router = Router.router(vertx)
     router.route("/static/*").handler(StaticHandler.create())
@@ -29,11 +26,7 @@ class BridgeVerticle extends ScalaVerticle {
       .createHttpServer()
       .requestHandler(router.accept)
       .listenFuture(port)
-      .andThen{
-        case Success(_) => promise.success(())
-        case Failure(t) => promise.failure(t)
-      }
-    promise.future
+        .map(_ => ())
   }
 
   def initSockJs = {
