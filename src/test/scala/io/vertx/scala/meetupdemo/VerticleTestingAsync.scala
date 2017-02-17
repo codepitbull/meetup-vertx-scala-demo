@@ -10,7 +10,7 @@ import scala.concurrent.duration._
 import scala.reflect.runtime.universe._
 import scala.util.{Failure, Success}
 
-abstract class VerticleTesting[A <: ScalaVerticle: TypeTag] extends FlatSpec with BeforeAndAfter{
+abstract class VerticleTestingAsync[A <: ScalaVerticle: TypeTag] extends AsyncFlatSpec with BeforeAndAfter{
   val vertx = Vertx.vertx
   implicit val vertxExecutionContext = VertxExecutionContext(
     vertx.getOrCreateContext()

@@ -1,4 +1,4 @@
-package io.vertx.scala.meetupdemo.ex1bus
+package io.vertx.scala.meetupdemo.ex2bus
 
 import io.vertx.lang.scala.ScalaVerticle
 
@@ -13,7 +13,7 @@ class BusVerticle extends ScalaVerticle {
     vertx
       .eventBus()
       .consumer[String]("testAddress")
-      .handler(_.reply("Hello World!"))
+      .handler(_.reply(hashCode().toString))
       .completionFuture()
   }
 }

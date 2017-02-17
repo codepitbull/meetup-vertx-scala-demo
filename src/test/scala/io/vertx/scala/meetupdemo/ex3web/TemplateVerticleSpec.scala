@@ -1,31 +1,26 @@
 package io.vertx.scala.meetupdemo.ex3web
 
+import io.restassured.RestAssured._
 import io.vertx.lang.scala.json.{Json, JsonObject}
 import io.vertx.scala.meetupdemo.{VerticleTesting, httpPort}
+import org.hamcrest.CoreMatchers.containsString
 import org.scalatest.Matchers
 
-import scala.concurrent.Promise
-import scala.util.Success
-
 /**
-  * Created by jochen on 16.02.17.
+  * Uses RestAssured based tests.
   */
 class TemplateVerticleSpec extends VerticleTesting[TemplateVerticle] with Matchers {
 
-  override def config(): JsonObject = Json.obj((httpPort, 8667))
+  port = 8666
 
-  "HttpVerticle" should "answer with HTML containing 'TestVar' to a request for /" in {
-    val promise = Promise[String]
-    vertx.createHttpClient()
-      .getNow(config().getInteger(httpPort), "127.0.0.1", "/", r => r.bodyHandler(body => promise.complete(Success(body.toString()))))
-    promise.future.map(res => res should include("TestVar"))
+  override def config(): JsonObject = Json.obj((httpPort, port))
+
+  "A request to /templates/test2.hbs" should "answer with HTML containing 'Template2'" in {
+    expect statusCode (200) and() body (containsString("Template2")) when() get ("/templates/test2.hbs")
   }
 
-  "HttpVerticle" should "answer with HTML containing 'Template2' to a request for /templates/test2.hbs" in {
-    val promise = Promise[String]
-    vertx.createHttpClient()
-      .getNow(config().getInteger(httpPort), "127.0.0.1", "/templates/test2.hbs", r => r.bodyHandler(body => promise.complete(Success(body.toString()))))
-    promise.future.map(res => res should include("Template2"))
+  "A request to /" should "answer with HTML containing 'TestVar'" in  {
+    expect statusCode (200) and() body (containsString("TestVar")) when() get ("/")
   }
 
 }

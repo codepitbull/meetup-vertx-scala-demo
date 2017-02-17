@@ -15,7 +15,7 @@ import scala.concurrent.Future
 class BridgeVerticle extends ScalaVerticle {
 
   override def startFuture(): Future[Unit] = {
-    val port = Option(config.getInteger(httpPort).intValue()).getOrElse(8080)
+    val port = config.getInteger(httpPort, 8084)
     vertx.setPeriodic(1000, a => vertx.eventBus().send("browser", s"from ${getClass.getName}"))
     vertx.eventBus().consumer("server", { a: Message[String] => println(a.body()) })
 

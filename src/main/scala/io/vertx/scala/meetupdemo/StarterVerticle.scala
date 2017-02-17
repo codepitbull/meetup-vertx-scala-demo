@@ -4,7 +4,7 @@ import io.vertx.lang.scala.ScalaVerticle
 import io.vertx.lang.scala.ScalaVerticle.nameForVerticle
 import io.vertx.lang.scala.json.Json
 import io.vertx.scala.core.DeploymentOptions
-import io.vertx.scala.meetupdemo.ex2http.HttpVerticle
+import io.vertx.scala.meetupdemo.ex1http.HttpVerticle
 import io.vertx.scala.meetupdemo.ex3web.TemplateVerticle
 import io.vertx.scala.meetupdemo.ex4bridge.BridgeVerticle
 import io.vertx.scala.meetupdemo.ex5metrics.MetricsVerticle

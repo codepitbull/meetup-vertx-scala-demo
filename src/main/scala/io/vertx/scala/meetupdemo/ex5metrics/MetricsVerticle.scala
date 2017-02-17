@@ -19,7 +19,7 @@ import scala.concurrent.Future
   */
 class MetricsVerticle extends ScalaVerticle {
   override def startFuture(): Future[Unit] = {
-    val port = Option(config.getInteger(httpPort).intValue()).getOrElse(8080)
+    val port = config.getInteger(httpPort, 8080)
     CollectorRegistry.defaultRegistry.register(new DropwizardExports(SharedMetricRegistries.getOrCreate("exported")))
 
     val router = Router.router(vertx)

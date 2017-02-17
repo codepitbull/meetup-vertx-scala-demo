@@ -15,7 +15,7 @@ import scala.util.{Failure, Success}
 class TemplateVerticle extends ScalaVerticle {
 
   override def startFuture(): Future[Unit] = {
-    val port = config.getInteger(httpPort, 8080)
+    val port = config.getInteger(httpPort, 8083)
     val templateEngine = HandlebarsTemplateEngine.create()
     val router = Router.router(vertx)
 

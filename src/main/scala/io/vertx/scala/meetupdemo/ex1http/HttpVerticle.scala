@@ -1,4 +1,4 @@
-package io.vertx.scala.meetupdemo.ex2http
+package io.vertx.scala.meetupdemo.ex1http
 
 import io.vertx.lang.scala.ScalaVerticle
 import io.vertx.scala.meetupdemo.httpPort
@@ -14,7 +14,7 @@ class HttpVerticle extends ScalaVerticle {
     vertx
       .createHttpServer()
       .requestHandler(_.response().end("Hello World"))
-      .listenFuture(config.getInteger(httpPort, 8080))
+      .listenFuture(config.getInteger(httpPort, 8081))
       .map(_ => ())
   }
 }
