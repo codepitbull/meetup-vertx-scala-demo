@@ -19,8 +19,7 @@ class StarterVerticle extends ScalaVerticle {
 
   override def startFuture(): Future[Unit] = {
     sequence(Seq(
-      vertx.deployVerticleFuture(nameForVerticle[HttpVerticle], DeploymentOptions().setConfig(Json.obj((httpPort, 8081)))),
-      vertx.deployVerticleFuture(nameForVerticle[MetricsVerticle], DeploymentOptions().setConfig(Json.obj((httpPort, 8082)))),
+      vertx.deployVerticleFuture(nameForVerticle[MetricsVerticle], DeploymentOptions().setConfig(Json.obj((httpPort, 8080)))),
       vertx.deployVerticleFuture(nameForVerticle[TemplateVerticle], DeploymentOptions().setConfig(Json.obj((httpPort, 8083)))),
       vertx.deployVerticleFuture(nameForVerticle[BridgeVerticle], DeploymentOptions().setConfig(Json.obj((httpPort, 8084)))))
     ).map(_ => ())

@@ -1,7 +1,3 @@
-#Getting vertx-lang-scala
-
-PR is still open!
-
 #Start Prometheus
 Use config from configs/prometheus.yml
 
