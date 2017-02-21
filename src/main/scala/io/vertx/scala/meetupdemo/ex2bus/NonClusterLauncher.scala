@@ -5,6 +5,8 @@ import io.vertx.scala.core.{DeploymentOptions, Vertx}
 
 /**
   * Launch a Vertx instance for playing around.
+  *
+  * @author <a href="mailto:jochen.mader@codecentric.de">Jochen Mader</a>
   */
 object NonClusterLauncher {
   def main(args: Array[String]): Unit = {

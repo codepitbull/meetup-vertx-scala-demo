@@ -16,6 +16,7 @@ import scala.concurrent.Future
   * To actuall get some metrics you will have to specify the system property that names the
   * metrics registry -Dvertx.metrics.options.registryName=exported
   *
+  * @author <a href="mailto:jochen.mader@codecentric.de">Jochen Mader</a>
   */
 class MetricsVerticle extends ScalaVerticle {
   override def startFuture(): Future[Unit] = {

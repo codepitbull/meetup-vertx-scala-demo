@@ -7,6 +7,8 @@ import scala.concurrent.Future
 
 /**
   * A small HTTP-server that always sends the same answer.
+  *
+  * @author <a href="mailto:jochen.mader@codecentric.de">Jochen Mader</a>
   */
 class HttpVerticle extends ScalaVerticle {
 

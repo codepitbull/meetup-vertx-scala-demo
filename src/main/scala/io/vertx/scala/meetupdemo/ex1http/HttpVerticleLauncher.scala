@@ -5,7 +5,9 @@ import io.vertx.scala.core.Vertx
 import io.vertx.scala.meetupdemo.ex3web.TemplateVerticle
 
 /**
-  * Launch a Vertx instance for playing around.
+  * Launch a Vertx instance and deploy HttpVerticle
+  *
+  * @author <a href="mailto:jochen.mader@codecentric.de">Jochen Mader</a>
   */
 object HttpVerticleLauncher {
   def main(args: Array[String]): Unit = {

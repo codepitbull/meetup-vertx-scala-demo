@@ -8,7 +8,9 @@ import scala.concurrent.Future
 import scala.util.{Failure, Success}
 
 /**
-  * A small HTTP-server that always sends the same answer.
+  * A small HTTP-server that tries to retrieve an answer from 'testAdress' to display it.
+  *
+  * @author <a href="mailto:jochen.mader@codecentric.de">Jochen Mader</a>
   */
 class HttpBusVerticle extends ScalaVerticle {
 

@@ -7,7 +7,7 @@ import org.hamcrest.CoreMatchers.containsString
 import org.scalatest.Matchers
 
 /**
-  * Uses RestAssured based tests.
+  * @author <a href="mailto:jochen.mader@codecentric.de">Jochen Mader</a>
   */
 class TemplateVerticleSpec extends VerticleTesting[TemplateVerticle] with Matchers {
 

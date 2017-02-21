@@ -6,6 +6,8 @@ import scala.concurrent.Future
 
 /**
   * Simple verticle that replies to the address 'testAddress'.
+  *
+  * @author <a href="mailto:jochen.mader@codecentric.de">Jochen Mader</a>
   */
 class BusVerticle extends ScalaVerticle {
 

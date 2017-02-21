@@ -1,3 +1,5 @@
+All code in this repo is subject to Apache 2.0 License.
+
 #Start Prometheus
 Use config from configs/prometheus.yml
 

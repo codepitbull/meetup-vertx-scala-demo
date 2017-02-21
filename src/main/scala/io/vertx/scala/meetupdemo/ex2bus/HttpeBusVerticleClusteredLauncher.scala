@@ -4,7 +4,9 @@ import io.vertx.lang.scala.ScalaVerticle.nameForVerticle
 import io.vertx.scala.core.{Vertx, VertxOptions}
 
 /**
-  * Launch a clustered Vertx instance for playing around.
+  * Launch a clustered Vertx instance and deploy HttpBusVerticle.
+  *
+  * @author <a href="mailto:jochen.mader@codecentric.de">Jochen Mader</a>
   */
 object HttpeBusVerticleClusteredLauncher {
   def main(args: Array[String]): Unit = {

@@ -11,6 +11,8 @@ import scala.util.{Failure, Success}
 
 /**
   * Examples for using templating engines.
+  *
+  * @author <a href="mailto:jochen.mader@codecentric.de">Jochen Mader</a>
   */
 class TemplateVerticle extends ScalaVerticle {
 

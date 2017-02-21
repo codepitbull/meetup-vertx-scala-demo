@@ -7,9 +7,8 @@ import org.scalatest._
 import scala.concurrent.Promise
 import scala.util.Success
 
-
 /**
-  * Shows how to test a HTTP-interface using Vertx-HttpClient.
+  * @author <a href="mailto:jochen.mader@codecentric.de">Jochen Mader</a>
   */
 class HttpVerticleSpec extends VerticleTestingAsync[HttpVerticle] with Matchers {
 

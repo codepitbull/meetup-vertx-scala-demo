@@ -4,7 +4,9 @@ import io.vertx.lang.scala.ScalaVerticle.nameForVerticle
 import io.vertx.scala.core.Vertx
 
 /**
-  * Launch a Vertx instance for playing around.
+  * Launch a Vertx instance and deploy BridgeVerticle.
+  *
+  * @author <a href="mailto:jochen.mader@codecentric.de">Jochen Mader</a>
   */
 object BridgeVerticleLauncher {
   def main(args: Array[String]): Unit = {

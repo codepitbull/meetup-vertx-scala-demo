@@ -14,6 +14,8 @@ import scala.concurrent.Future.sequence
 
 /**
   * Example for a starter verticle that deploys several other verticles.
+  *
+  * @author <a href="mailto:jochen.mader@codecentric.de">Jochen Mader</a>
   */
 class StarterVerticle extends ScalaVerticle {
 

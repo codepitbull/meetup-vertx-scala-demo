@@ -10,6 +10,9 @@ import scala.concurrent.duration._
 import scala.reflect.runtime.universe._
 import scala.util.{Failure, Success}
 
+/**
+  * @author <a href="mailto:jochen.mader@codecentric.de">Jochen Mader</a>
+  */
 abstract class VerticleTesting[A <: ScalaVerticle: TypeTag] extends FlatSpec with BeforeAndAfter{
   val vertx = Vertx.vertx
   implicit val vertxExecutionContext = VertxExecutionContext(

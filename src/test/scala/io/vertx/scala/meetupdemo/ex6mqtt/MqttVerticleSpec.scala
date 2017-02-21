@@ -10,7 +10,7 @@ import org.scalatest.Matchers
 import scala.concurrent.Promise
 
 /**
-  * Created by jochen on 16.02.17.
+  * @author <a href="mailto:jochen.mader@codecentric.de">Jochen Mader</a>
   */
 class MqttVerticleSpec
   extends VerticleTestingAsync[MqttVerticle] with Matchers {
