@@ -7,7 +7,7 @@ import io.vertx.scala.meetupdemo.ex1http.HttpVerticle
 /**
   * Launch a clustered Vertx instance for playing around.
   */
-object BusVerticleLauncher {
+object BusVerticleClusteredLauncher {
   def main(args: Array[String]): Unit = {
     //Reduce heartbeat interval for demo purposes
     System.setProperty("hazelcast.max.no.heartbeat.seconds","5")

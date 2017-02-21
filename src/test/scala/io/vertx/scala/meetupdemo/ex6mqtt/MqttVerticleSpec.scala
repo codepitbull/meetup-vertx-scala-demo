@@ -27,7 +27,7 @@ class MqttVerticleSpec
     val message = new MqttMessage("hallo welt".getBytes)
     message.setQos(0)
     sampleClient.publish("test", message)
-    promise.future.map(res => res should not be empty)
+    promise.future.map(res => res should equal("received [hallo welt] from JavaSample"))
   }
 
 }

@@ -10,7 +10,7 @@ import scala.util.{Failure, Success}
 /**
   * A small HTTP-server that always sends the same answer.
   */
-class HttpClusterVerticle extends ScalaVerticle {
+class HttpBusVerticle extends ScalaVerticle {
 
   override def startFuture(): Future[Unit] = {
     vertx

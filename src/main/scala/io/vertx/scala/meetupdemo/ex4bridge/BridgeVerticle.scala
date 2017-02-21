@@ -11,6 +11,8 @@ import scala.concurrent.Future
 
 /**
   * Example for using the browser bridge from a verticle.
+  *
+  * http://127.0.0.1:8084/static/index.html
   */
 class BridgeVerticle extends ScalaVerticle {
 

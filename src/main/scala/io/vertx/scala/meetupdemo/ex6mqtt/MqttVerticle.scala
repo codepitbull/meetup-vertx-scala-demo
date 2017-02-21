@@ -15,7 +15,9 @@ class MqttVerticle extends ScalaVerticle {
     val port = config.getInteger(mqttPort, 1883)
     val mqttServer = MqttServer.create(vertx)
     mqttServer.endpointHandler(endpoint => {
+      println(s"CLIENT ${endpoint.clientIdentifier()}")
       endpoint.publishHandler(message => {
+        println(s"received [${message.payload().toString()}] from ${endpoint.clientIdentifier()}")
         vertx.eventBus().send("mqtt.received", s"received [${message.payload().toString()}] from ${endpoint.clientIdentifier()}")
       })
       endpoint.accept(false)
